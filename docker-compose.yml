@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  php-apache:
+    container_name: php-apache
+    build:
+      context: .
+      dockerfile: ./php.Dockerfile
+    volumes:
+      - ./www:/var/www/html/
+    environment:
+      DB_HOST: "${DB_HOST}"
+      DB_NAME: "${DB_NAME}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+
+    restart: always
+    networks:
+      default:
+        ipv4_address: "${IP}"
+
+networks:
+    default:
+        external:
+            name: netw
